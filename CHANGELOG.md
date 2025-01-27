@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.3] - 2025-01-28
 
 - **Added**:
-- Added comment for LogColor enum to help developers
+- Comments to LogColor enum for clarity
 
 ---
 
