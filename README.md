@@ -25,7 +25,7 @@ Add the following to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  colorful_log: ^1.0.0
+  colorful_log: ^0.0.1
 ```
 
 Then run:

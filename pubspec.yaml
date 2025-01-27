@@ -1,6 +1,6 @@
 name: colorful_log
 description: A Dart package for logging messages with colorful console outputs for enhanced readability and debugging.
-version: 1.0.0
+version: 0.0.1
 homepage: https://github.com/Moein-dev/colorful_log
 
 
