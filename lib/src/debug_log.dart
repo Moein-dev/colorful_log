@@ -26,13 +26,14 @@ enum LogColor {
 void debugLog({
   Type? type,
   String tag = 'Debugger',
-  String message = "LOG",
+  String message = "No Message",
   LogColor color = LogColor.reset,
+  LogColor tagColor = LogColor.reset,
   Object? error,
   StackTrace? stackTrace,
 }) {
   String formattedMessage = '${color.code}$message${LogColor.reset.code}';
-  String formattedName = '${color.code}${type ?? tag}${LogColor.reset.code}';
+  String formattedName = '${tagColor.code}${type ?? tag}${LogColor.reset.code}';
 
   log(
     formattedMessage,
