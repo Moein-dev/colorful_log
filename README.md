@@ -4,6 +4,12 @@ A simple Dart package to log messages with colorful outputs in the console. This
 
 ---
 
+## Requirements
+
+- Dart SDK: `>=2.17.0`
+- Flutter: `>=2.5.0`
+
+
 ## Features
 
 - Log messages with custom colors.
