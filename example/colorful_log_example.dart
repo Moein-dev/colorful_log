@@ -1,4 +1,4 @@
-import 'package:colorful_log/colorful_log.dart';
+import 'package:colorful_log_plus/colorful_log_plus.dart';
 
 void main() {
   // Basic log with default settings

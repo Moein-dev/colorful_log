@@ -1,8 +1,4 @@
 // Package: debug_logger
-
-/// A simple logger package to display colorful debug logs in the console.
-
-
 import 'dart:developer';
 
 /// Enum for ANSI color codes.
