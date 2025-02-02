@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2025-02-02
+
+- **Fixed**:
+  - **Caller File Path Accuracy**:
+    - `debugLog` now correctly displays the **calling file** (e.g., `translate_tap.dart`) instead of always showing `debug_log.dart`.
+    - Stack trace processing has been **enhanced** to ignore internal logs and correctly capture the **first external caller**.
+    - Log messages with `showLogAddress: true` now provide a **clickable absolute file path**.
+
+- **Changed**:
+  - **Improved Stack Trace Parsing**:
+    - Extracted stack trace logic to scan multiple frames and detect the first **non-internal call**.
+    - Enhanced **package-based path resolution** to ensure paths are correctly converted to absolute file paths on all platforms.
+    - **Better support for VS Code and IntelliJ**, ensuring log file paths are **clickable and navigable**.
+
 ## [1.0.1] - 2025-02-02
 
 - **Added**:
