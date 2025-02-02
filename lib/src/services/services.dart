@@ -1,20 +1,16 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
-
-part 'extract_file_info_service.dart';
+import 'extract_file_info_service.dart';
 
 class DebugLogServices {
   /// Private method to extract the full file path and line number from stack trace.
-  static (String?, String?) extractFileInfo() {
+static (String?, String?) extractFileInfo() {
   StackTrace stackTrace = StackTrace.current;
   List<String> traceLines = stackTrace.toString().split("\n");
 
-  // Dynamically detect the first external caller (outside colorful_log_plus package)
+  // Detect the first caller OUTSIDE the package
   String? traceString;
   for (var line in traceLines) {
-    if (!line.contains('/colorful_log_plus/')) { // Ignore package-internal calls
+    if (!line.contains('/colorful_log_plus/') && !line.contains('services.dart') && !line.contains('debug_log.dart')) {
       traceString = line;
       break;
     }
@@ -31,17 +27,16 @@ class DebugLogServices {
   String filePath = match.group(1)!; // Extracted file path
   String lineNumber = match.group(2)!; // Extracted line number
 
-    // Convert relative path to absolute path (Only works on non-Web)
-    if (!kIsWeb && filePath.startsWith('package:')) {
-      filePath = _extractFileInfoService(filePath) ?? filePath;
-    }
-
-    // Web workaround (show only relative path)
-    if (kIsWeb) {
-      return ("[Web] $filePath", lineNumber);
-    }
-
-    // Format for clickable paths
-    return ("file://$filePath", lineNumber);
+  // Convert 'package:' paths to absolute paths (only for non-Web)
+  if (!kIsWeb && filePath.startsWith('package:')) {
+    filePath = resolvePackagePath(filePath) ?? filePath;
   }
+
+  // Web workaround (show only relative package path)
+  if (kIsWeb) {
+    return ("[Web] $filePath:$lineNumber", lineNumber);
+  }
+
+  return ("file://$filePath:$lineNumber", lineNumber);
+}
 }

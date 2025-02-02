@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] - 2025-02-02
+
+- **Fixed**:
+  - **Caller File Path Fix**:
+    - `debugLog` now correctly captures the **actual calling file** instead of internal package files.
+    - Dynamically filters out **all internal package calls** (`services.dart`, `debug_log.dart`, etc.).
+    - Stack trace scanning is now **more reliable**, ensuring the **first real external caller is logged**.
+
+- **Changed**:
+  - **Enhanced Stack Trace Processing**:
+    - Log paths are now **fully clickable** in IDEs.
+    - **Ensures cross-platform accuracy** (Windows, macOS, Linux, Android, iOS, Web).
+
 ## [1.0.3] - 2025-02-02
 
 - **Fixed**:
