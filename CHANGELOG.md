@@ -2,12 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2025-02-02
+
+- **Added**:
+- Initial stable release.
+- Introduced a structured logging system with:
+  - **Customizable tags** for better organization.
+  - **ANSI color support** for improved readability.
+  - **Icons for different log levels** (info, warning, error, debug).
+  - **Error and stack trace logging** for better debugging.
+  - **Optional source file tracking** for precise debugging.
+
+- **Changed**:
+- Improved `debugLog` function to support structured logging.
+- Enhanced color and tag formatting for consistency.
+- Refactored API for ease of use.
+
+- **Fixed**:
+- Resolved minor formatting inconsistencies.
+- Ensured proper handling of log messages across different platforms.
+
+---  
+
 ## [0.0.3] - 2025-01-28
 
 - **Added**:
 - Comments to LogColor enum for clarity
-
----
 
 ## [0.0.2] - 2025-01-28
 
@@ -17,8 +37,6 @@ All notable changes to this project will be documented in this file.
 - **Changed**:
 
 - Updated the `debugLog` function to include `tagColor` for more flexible and visually distinct log formatting.
-
----
 
 ## [0.0.1] - 2025-01-27
 
@@ -34,8 +52,6 @@ All notable changes to this project will be documented in this file.
 
 - **Fixed**:
 - Resolved issues with inconsistent log formatting for type and tag combinations.
-
----
 
 ## [Unreleased]
 

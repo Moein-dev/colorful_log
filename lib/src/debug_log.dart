@@ -1,55 +1,65 @@
 // Package: debug_logger
 import 'dart:developer';
+part 'enums/log_icon.enum.dart';
+part 'enums/log_color.enum.dart';
 
-/// Enum for ANSI color codes for logging.
-enum LogColor {
-  /// Resets to the default console color.
-  reset('\x1B[0m'),
-
-  /// Red color, typically used for errors.
-  red('\x1B[31m'),
-
-  /// Green color, typically used for success messages.
-  green('\x1B[32m'),
-
-  /// Yellow color, typically used for warnings.
-  yellow('\x1B[33m'),
-
-  /// Blue color, typically used for informational messages.
-  blue('\x1B[34m'),
-
-  /// Magenta color, typically used for emphasis.
-  magenta('\x1B[35m'),
-
-  /// Cyan color, typically used for general or neutral messages.
-  cyan('\x1B[36m');
-
-  /// The ANSI escape code associated with this color.
-  final String code;
-
-  /// Creates a [LogColor] instance with the associated ANSI [code].
-  const LogColor(this.code);
-}
-
-/// Logs a message with optional color, tag, and additional details.
+/// A utility for logging debug messages with customizable colors, icons, and context.
 ///
-/// - [type]: The class or type generating the log (optional).
-/// - [tag]: A custom tag for the log (default is 'Debugger').
-/// - [message]: The log message (default is 'LOG').
-/// - [color]: The ANSI color for the log message (default is no color).
-/// - [error]: An optional error object to log.
-/// - [stackTrace]: An optional stack trace to log.
+/// This function supports:
+/// - Custom tags and message formatting.
+/// - ANSI color codes for terminal output.
+/// - Error and stack trace logging.
+/// - Source file location tracking (optional).
+///
+/// Example:
+/// ```dart
+/// debugLog(
+///   tag: 'Network',
+///   message: 'Request sent',
+///   color: LogColor.cyan,
+///   iconType: LogIconType.info,
+/// );
+/// ```
+///
+/// Parameters:
+/// - [type]: The runtime type of the class generating the log (e.g., `MyClass`).
+/// - [tag]: A label for categorizing logs (default: 'Debugger').
+/// - [message]: The log content (default: 'No Message').
+/// - [iconType]: An emoji icon prepended to the log (default: [LogIconType.info]).
+/// - [color]: ANSI color for the message text (default: [LogColor.reset]).
+/// - [tagColor]: ANSI color for the tag/icon section (default: [LogColor.reset]).
+/// - [error]: An error object to log alongside the message.
+/// - [stackTrace]: Stack trace associated with an error.
+/// - [showLogAddress]: When `true`, appends source file location (e.g., `main.dart:42`).
 void debugLog({
   Type? type,
   String tag = 'Debugger',
   String message = "No Message",
+  LogIconType iconType = LogIconType.info,
   LogColor color = LogColor.reset,
   LogColor tagColor = LogColor.reset,
   Object? error,
   StackTrace? stackTrace,
+  bool showLogAddress = false,
 }) {
-  String formattedMessage = '${color.code}$message${LogColor.reset.code}';
-  String formattedName = '${tagColor.code}${type ?? tag}${LogColor.reset.code}';
+  String? fileName;
+  String? lineNumber;
+  if (showLogAddress) {
+    StackTrace stackTrace = StackTrace.current;
+    String traceString = stackTrace.toString().split("\n")[1];
+    int indexOfFileName = traceString.indexOf(RegExp(r'[A-Za-z_]+.dart'));
+    String fileInfo = traceString.substring(indexOfFileName);
+    fileName = fileInfo.split(":")[0];
+    lineNumber = fileInfo.split(":")[1];
+  }
+  String iconString = "[${iconType.icon}]";
+  String? filePath =
+      fileName != null && lineNumber != null ? '[$fileName:$lineNumber]' : null;
+
+  String formattedMessage =
+      '${color.code}$message${LogColor.reset.code} ${filePath != null ? "\n $filePath" : ""}';
+  String formattedName =
+      '${tagColor.code}$iconString ${type ?? tag}${LogColor.reset.code}';
 
   log(
     formattedMessage,
