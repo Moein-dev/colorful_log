@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2025-02-02
+
+- **Fixed**:
+  - **Caller File Path Bug**:
+    - `debugLog` now correctly shows the actual calling file (e.g., `translate_tap.dart`) instead of internal package files (`services.dart`).
+    - **Dynamically filters internal package calls** (`colorful_log_plus/`) to find the first external caller.
+    - Ensures **log file paths remain clickable** in IDEs.
+
+- **Changed**:
+  - **Improved Stack Trace Processing**:
+    - Enhanced log path detection to be **fully automatic**, ignoring internal logs dynamically.
+    - **Better IDE clickability** in VS Code and IntelliJ.
+
 ## [1.0.2] - 2025-02-02
 
 - **Fixed**:
