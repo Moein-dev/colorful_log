@@ -42,4 +42,12 @@ void main() {
     tag: 'WarningTag',
     color: LogColor.yellow,
   );
+
+  // Logging with address
+  debugLog(
+    message: 'This is a warning',
+    tag: 'WarningTag',
+    color: LogColor.yellow,
+    showLogAddress: true,
+  );
 }

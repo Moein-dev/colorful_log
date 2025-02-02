@@ -26,19 +26,20 @@ class DebugLogServices {
 
     if (match == null) return (null, null);
 
-    String filePath = match.group(1)!; // Extracted file path
+    String filePath =
+        match.group(1)!; // Extracted file path (might be relative)
     String lineNumber = match.group(2)!; // Extracted line number
 
-    // Convert 'package:' paths to absolute paths (only for non-Web)
-    if (!kIsWeb && filePath.startsWith('package:')) {
+    // Ensure the path is correctly formatted
+    if (!kIsWeb && filePath.startsWith('lib/')) {
       filePath = resolvePackagePath(filePath) ?? filePath;
     }
 
     // Web workaround (show only relative package path)
     if (kIsWeb) {
-      return ("[Web] $filePath", lineNumber);
+      return ("[Web] $filePath:$lineNumber", lineNumber);
     }
 
-    return ("file://$filePath", lineNumber);
+    return ("file://$filePath:$lineNumber", lineNumber);
   }
 }

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2025-02-04
+
+- **Fixed**:
+  - **Absolute File Path Resolution**:
+    - Log file paths now correctly include the **full project root path** (e.g., `file:///Users/apple/Projects/project_name/`).
+
 ## [1.0.5] - 2025-02-02
 
 - **Fixed**:
