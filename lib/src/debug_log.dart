@@ -1,5 +1,6 @@
 // Package: debug_logger
 import 'dart:developer';
+import 'package:colorful_log_plus/src/services/services.dart';
 part 'enums/log_icon.enum.dart';
 part 'enums/log_color.enum.dart';
 
@@ -45,12 +46,9 @@ void debugLog({
   String? fileName;
   String? lineNumber;
   if (showLogAddress) {
-    StackTrace stackTrace = StackTrace.current;
-    String traceString = stackTrace.toString().split("\n")[1];
-    int indexOfFileName = traceString.indexOf(RegExp(r'[A-Za-z_]+.dart'));
-    String fileInfo = traceString.substring(indexOfFileName);
-    fileName = fileInfo.split(":")[0];
-    lineNumber = fileInfo.split(":")[1];
+    var fileInfo = DebugLogServices.extractFileInfo();
+    fileName = fileInfo.$1;
+    lineNumber = fileInfo.$2;
   }
   String iconString = "[${iconType.icon}]";
   String? filePath =
@@ -68,3 +66,4 @@ void debugLog({
     stackTrace: stackTrace,
   );
 }
+

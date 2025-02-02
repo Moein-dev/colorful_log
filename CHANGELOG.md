@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1] - 2025-02-02
+
+- **Added**:
+  - Introduced `DebugLogServices.extractFileInfo()` to handle file path extraction.
+  - Added `_extractFileInfoService()` for resolving absolute file paths.
+  - Implemented full cross-platform file path retrieval, ensuring:
+    - ✅ **Windows/macOS/Linux** → Absolute paths are extracted.
+    - ✅ **Android/iOS** → Relative paths are used.
+    - ✅ **Web** → Displays relative paths only (no filesystem access).
+  
+- **Changed**:
+  - **Refactored `debugLog`**:
+    - Extracted stack trace handling into a dedicated service (`DebugLogServices`).
+    - Improved log formatting for better readability and consistency.
+  - **Updated API**:
+    - `debugLog` now calls `DebugLogServices.extractFileInfo()` instead of inline stack trace processing.
+
+- **Fixed**:
+  - **Clickable log file paths**:
+    - File paths in logs are now formatted as **`file://` URLs** for IDE compatibility.
+    - Clicking the log address in **VS Code / IntelliJ** now navigates to the correct file & line.
+  - **Fixed inconsistencies** in file path resolution across platforms.
+
 ## [1.0.0] - 2025-02-02
 
 - **Added**:
