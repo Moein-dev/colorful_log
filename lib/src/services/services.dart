@@ -36,9 +36,9 @@ class DebugLogServices {
 
     // Web workaround (show only relative package path)
     if (kIsWeb) {
-      return ("[Web] $filePath:$lineNumber", lineNumber);
+      return ("[Web] $filePath", lineNumber);
     }
 
-    return ("file://$filePath:$lineNumber", lineNumber);
+    return ("file://$filePath", lineNumber);
   }
 }

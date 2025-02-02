@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2025-02-02
+
+- **Fixed**:
+  - **Caller File Path Fix**:
+    - Stack trace scanning is now **more reliable**, ensuring the **first real external caller is logged**.
+
 ## [1.0.4] - 2025-02-02
 
 - **Fixed**:
