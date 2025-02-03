@@ -7,7 +7,9 @@ class DebugLogServices {
     // Extract the first valid log call location outside the package
     RegExp regex = RegExp(r'\((.*?\.dart):(\d+):\d+\)');
     for (var line in traceLines) {
-      if (!line.contains("/colorful_log_plus/") && !line.contains("services.dart") && !line.contains("debug_log.dart")) {
+      if (!line.contains("/colorful_log_plus/") &&
+          !line.contains("services.dart") &&
+          !line.contains("debug_log.dart")) {
         Match? match = regex.firstMatch(line);
         if (match != null) {
           String filePath = match.group(1)!;
