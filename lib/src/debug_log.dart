@@ -51,11 +51,12 @@ void debugLog({
     lineNumber = fileInfo.$2;
   }
   String iconString = "[${iconType.icon}]";
-  String? filePath =
-      fileName != null && lineNumber != null ? '[$fileName:$lineNumber]' : null;
+  String? filePath = fileName != null && lineNumber != null
+      ? ' on: \x1B[4m$fileName:$lineNumber\x1B[0m'
+      : null;
 
   String formattedMessage =
-      '${color.code}$message${LogColor.reset.code} ${filePath != null ? "\n $filePath" : ""}';
+      '${color.code}$message${LogColor.reset.code} ${filePath ?? ''}';
   String formattedName =
       '${tagColor.code}$iconString ${type ?? tag}${LogColor.reset.code}';
 

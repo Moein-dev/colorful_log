@@ -1,45 +1,24 @@
-import 'package:flutter/foundation.dart';
-import 'extract_file_info_service.dart';
-
 class DebugLogServices {
   /// Private method to extract the full file path and line number from stack trace.
   static (String?, String?) extractFileInfo() {
     StackTrace stackTrace = StackTrace.current;
     List<String> traceLines = stackTrace.toString().split("\n");
 
-    // Detect the first caller OUTSIDE the package
-    String? traceString;
+    // Extract the first valid log call location outside the package
+    RegExp regex = RegExp(r'\((.*?\.dart):(\d+):\d+\)');
     for (var line in traceLines) {
-      if (!line.contains('/colorful_log_plus/') &&
-          !line.contains('services.dart') &&
-          !line.contains('debug_log.dart')) {
-        traceString = line;
-        break;
+      if (!line.contains("/colorful_log_plus/") && !line.contains("services.dart") && !line.contains("debug_log.dart")) {
+        Match? match = regex.firstMatch(line);
+        if (match != null) {
+          String filePath = match.group(1)!;
+          String lineNumber = match.group(2)!;
+
+          // Extract only the file name from the full path
+          String fileName = filePath.split("/").last;
+          return (fileName, lineNumber);
+        }
       }
     }
-
-    if (traceString == null) return (null, null);
-
-    // Extract file path and line number using regex
-    RegExp regex = RegExp(r'\((.*?\.dart):(\d+):\d+\)');
-    Match? match = regex.firstMatch(traceString);
-
-    if (match == null) return (null, null);
-
-    String filePath =
-        match.group(1)!; // Extracted file path (might be relative)
-    String lineNumber = match.group(2)!; // Extracted line number
-
-    // Ensure the path is correctly formatted
-    if (!kIsWeb && filePath.startsWith('lib/')) {
-      filePath = resolvePackagePath(filePath) ?? filePath;
-    }
-
-    // Web workaround (show only relative package path)
-    if (kIsWeb) {
-      return ("[Web] $filePath:$lineNumber", lineNumber);
-    }
-
-    return ("file://$filePath:$lineNumber", lineNumber);
+    return ("", "");
   }
 }

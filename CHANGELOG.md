@@ -2,7 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.6] - 2025-02-04
+## [1.0.6] - 2025-02-03
+
+- **Changed**:
+  - **Enhanced log file tracking**:
+    - `debugLog` now correctly extracts and displays **file name & line number** where the log is called.
+    - The log location is now **underlined** in ANSI-supported terminals for easy clicking.
+    - Improved accuracy of **log caller detection**, ensuring only external caller locations are displayed.
+
+- **Fixed**:
+  - **Fixed incorrect file path logging**:
+    - Previously, logs were capturing internal package files (`services.dart` or `debug_log.dart`).
+    - Now, `debugLog` only captures **external files** where the log function is actually called.
+
+## [1.0.6] - 2025-02-02
 
 - **Fixed**:
   - **Absolute File Path Resolution**:
