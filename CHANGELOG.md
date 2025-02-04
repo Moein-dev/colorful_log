@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.8] - 2025-02-04
+
+- **Added**:
+  - **New Feature**: Introduced `logLevelFilter` to allow filtering logs by level (e.g., debug, info, warning, error).
+  - **Configuration**: Added support for configuring log output format via `LogConfig` class.
+
+- **Changed**:
+  - **Log Formatting**: Improved log message formatting for better readability.
+  - **Performance**: Optimized log processing to reduce overhead and improve performance.
+
+- **Fixed**:
+  - **Bug Fix**: Resolved an issue where log messages were not displaying correctly in certain terminal emulators.
+  - **Compatibility**: Fixed compatibility issues with older versions of Dart.
+
 ## [1.0.7] - 2025-02-03
 
 - **Changed**:
