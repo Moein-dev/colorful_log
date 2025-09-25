@@ -50,7 +50,7 @@ void debugLog({
     fileName = fileInfo.$1;
     lineNumber = fileInfo.$2;
   }
-  String iconString = "[${iconType.icon}]";
+  String iconString = "${iconType.icon} ";
   String? filePath = fileName != null && lineNumber != null
       ? ' on: \x1B[4m$fileName:$lineNumber\x1B[0m'
       : null;
